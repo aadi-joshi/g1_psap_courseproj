@@ -5,5 +5,7 @@
 
 void clearScreen();
 void displayMenu();
+void clearInputBuffer();
+const char* getValidCategories();
 
 #endif

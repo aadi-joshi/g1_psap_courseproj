@@ -4,10 +4,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <time.h>
 
 #define MAX_STRING 100
 #define MAX_TRANSACTIONS 1000
+#define NUM_CATEGORIES 4  // Define as a macro
 
 typedef struct {
     char username[MAX_STRING];
@@ -22,8 +22,9 @@ typedef struct {
     char username[MAX_STRING];
 } Transaction;
 
-// Function declarations
 void clearScreen();
 void displayMenu();
+void clearInputBuffer();
+const char* getValidCategories();
 
 #endif

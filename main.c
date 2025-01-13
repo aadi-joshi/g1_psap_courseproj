@@ -14,7 +14,12 @@ int main() {
         printf("2. Register\n");
         printf("3. Exit\n");
         printf("Choose an option: ");
-        scanf("%d", &choice);
+        if (scanf("%d", &choice) != 1) {
+            printf("Invalid input. Please enter a number.\n");
+            clearInputBuffer();
+            continue;
+        }
+        clearInputBuffer();
         
         switch(choice) {
             case 1:
@@ -39,7 +44,12 @@ int main() {
     
     while (1) {
         displayMenu();
-        scanf("%d", &choice);
+        if (scanf("%d", &choice) != 1) {
+            printf("Invalid input. Please enter a number.\n");
+            clearInputBuffer();
+            continue;
+        }
+        clearInputBuffer();
         
         switch(choice) {
             case 1:
@@ -52,6 +62,9 @@ int main() {
                 generateReport(currentUser.username);
                 break;
             case 4:
+                deleteTransaction(currentUser.username);  // New option
+                break;
+            case 5:
                 printf("\nGoodbye!\n");
                 return 0;
             default:

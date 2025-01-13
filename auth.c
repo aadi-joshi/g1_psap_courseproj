@@ -3,28 +3,69 @@
 User signIn() {
     User user;
     printf("\nSign In\n");
-    printf("Username: ");
-    scanf("%s", user.username);
-    printf("Password: ");
-    scanf("%s", user.password);
+    
+    do {
+        printf("Username (max %d chars): ", MAX_STRING-1);
+        if (scanf("%99s", user.username) != 1) {
+            printf("Invalid username. Please enter again.\n");
+            clearInputBuffer();
+            continue;
+        }
+        clearInputBuffer();
+    } while (strlen(user.username) == 0);
+    
+    do {
+        printf("Password (max %d chars): ", MAX_STRING-1);
+        if (scanf("%99s", user.password) != 1) {
+            printf("Invalid password. Please enter again.\n");
+            clearInputBuffer();
+            continue;
+        }
+        clearInputBuffer();
+    } while (strlen(user.password) == 0);
+    
     return user;
 }
 
 void registerUser() {
-    User newUser;
+    User newUser, tempUser;
     FILE *fp;
     
     printf("\nRegister New User\n");
-    printf("Username: ");
-    scanf("%s", newUser.username);
-    printf("Password: ");
-    scanf("%s", newUser.password);
+    do {
+        printf("Username (max %d chars): ", MAX_STRING-1);
+        if (scanf("%99s", newUser.username) != 1) {
+            printf("Invalid username. Please enter again.\n");
+            clearInputBuffer();
+            continue;
+        }
+        clearInputBuffer();
+    } while (strlen(newUser.username) == 0);
+    
+    strcpy(tempUser.username, newUser.username);
+    strcpy(tempUser.password, "");  // Empty password for checking username only
+    if (authenticateUser(tempUser)) {
+        printf("Username already exists.\n");
+        return;
+    }
+    
+    do {
+        printf("Password (max %d chars): ", MAX_STRING-1);
+        if (scanf("%99s", newUser.password) != 1) {
+            printf("Invalid password. Please enter again.\n");
+            clearInputBuffer();
+            continue;
+        }
+        clearInputBuffer();
+    } while (strlen(newUser.password) == 0);
     
     fp = fopen("users.csv", "a");
     if (fp != NULL) {
         fprintf(fp, "%s,%s\n", newUser.username, newUser.password);
         fclose(fp);
         printf("Registration successful!\n");
+    } else {
+        printf("Error: Could not open file for writing.\n");
     }
 }
 
