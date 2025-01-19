@@ -1,9 +1,15 @@
+#include "colors.h"  // Move this first
 #include "main.h"
 #include "auth.h"
 #include "transactions.h"
 #include "utils.h"
 
 int main() {
+    #ifdef _WIN32
+    // Set console to use UTF-8
+    system("chcp 65001");
+    #endif
+
     int choice;
     User currentUser;
     int isLoggedIn = 0;
@@ -43,9 +49,10 @@ int main() {
     }
     
     while (1) {
+        displayWelcomeBanner();
         displayMenu();
         if (scanf("%d", &choice) != 1) {
-            printf("Invalid input. Please enter a number.\n");
+            printColored("Invalid input. Please enter a number.\n", RED);
             clearInputBuffer();
             continue;
         }
@@ -60,15 +67,23 @@ int main() {
                 break;
             case 3:
                 generateReport(currentUser.username);
+                analyzeTrends(currentUser.username);
+                calculateStatistics(currentUser.username);
                 break;
             case 4:
-                deleteTransaction(currentUser.username);  // New option
+                deleteTransaction(currentUser.username);
                 break;
             case 5:
-                printf("\nGoodbye!\n");
+                searchTransactions(currentUser.username);
+                break;
+            case 6:
+                displayTransactionMatrix(currentUser.username);
+                break;
+            case 7:
+                printColored("\nThank you for using Personal Finance Tracker!\n", GREEN);
                 return 0;
             default:
-                printf("\nInvalid choice!\n");
+                printColored("\nInvalid choice!\n", RED);
         }
     }
     

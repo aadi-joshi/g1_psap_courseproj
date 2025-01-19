@@ -3,15 +3,21 @@
 
 #include "main.h"
 
-#define NUM_CATEGORIES 4  // Define as a macro
-
 // Basic operations
 void addTransaction(char *username);
 void viewTransactions(char *username);
 void generateReport(char *username);
-void deleteTransaction(char *username);  // New function
+void deleteTransaction(char *username);
 
-// Simple sorting
-void sortTransactions(Transaction *trans, int n);  // Basic bubble sort
+// Advanced operations
+void searchTransactions(char *username);
+void displayTransactionMatrix(char *username);
+void analyzeTrends(char *username);
+void calculateStatistics(char *username);
+
+// Sorting functions
+void sortTransactions(Transaction *trans, int n);
+void sortTransactionsByDate(Transaction *trans, int n);
+float calculateRecursiveTotal(Transaction *trans, int n);
 
 #endif

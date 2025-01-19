@@ -1,5 +1,11 @@
 #include "transactions.h"
+#include "utils.h"
+#include "colors.h"
 #include <ctype.h>
+#include <float.h>
+#include <math.h>
+
+// Remove color definitions as they're now in colors.h
 
 const char* VALID_CATEGORIES[] = {"Food", "Rent", "Utilities", "Others"};
 
@@ -275,5 +281,108 @@ void generateReport(char *username) {
         }
     } else {
         printf("Error: Could not open file for reading.\n");
+    }
+}
+
+void searchTransactions(char *username) {
+    FILE *fp;
+    Transaction trans;
+    char searchTerm[MAX_STRING];
+    int found = 0;
+    
+    printf("\n%sSearch Transactions%s\n", CYAN, RESET);
+    printf("Enter search term (category/description): ");
+    scanf("%s", searchTerm);
+    clearInputBuffer();
+    
+    printf("\n%s%-12s%-15s%-12s%-20s%s\n", 
+           YELLOW, "Date", "Category", "Amount", "Description", RESET);
+    printf("---------------------------------------------------\n");
+    
+    fp = fopen("transactions.dat", "rb");
+    if (fp != NULL) {
+        while (fread(&trans, sizeof(Transaction), 1, fp) == 1) {
+            if (strcmp(username, trans.username) == 0 && 
+                (strstr(trans.category, searchTerm) || 
+                 strstr(trans.description, searchTerm))) {
+                printf("%-12s%-15s$%-11.2f%-20s\n", 
+                       trans.date, 
+                       trans.category, 
+                       trans.amount, 
+                       trans.description);
+                found = 1;
+            }
+        }
+        fclose(fp);
+        
+        if (!found) {
+            printf("%sNo matching transactions found.%s\n", RED, RESET);
+        }
+    }
+}
+
+void analyzeTrends(char *username) {
+    FILE *fp;
+    Transaction trans;
+    float monthlyTotals[12] = {0};
+    int monthlyCount[12] = {0};
+    int currentMonth, day, year;
+    
+    fp = fopen("transactions.dat", "rb");
+    if (fp != NULL) {
+        while (fread(&trans, sizeof(Transaction), 1, fp) == 1) {
+            if (strcmp(username, trans.username) == 0) {
+                sscanf(trans.date, "%d/%d/%d", &day, &currentMonth, &year);
+                monthlyTotals[currentMonth-1] += trans.amount;
+                monthlyCount[currentMonth-1]++;
+            }
+        }
+        fclose(fp);
+        
+        printf("\n%sMonthly Spending Trends%s\n", CYAN, RESET);
+        printf("------------------------\n");
+        for (int i = 0; i < 12; i++) {
+            if (monthlyCount[i] > 0) {
+                float average = monthlyTotals[i] / monthlyCount[i];
+                printf("Month %2d: Total: $%.2f, Avg: $%.2f, Count: %d\n",
+                       i+1, monthlyTotals[i], average, monthlyCount[i]);
+            }
+        }
+    }
+}
+
+void calculateStatistics(char *username) {
+    FILE *fp;
+    Transaction trans;
+    float sum = 0, sumSquared = 0;
+    int count = 0;
+    float min = FLT_MAX, max = 0;
+    
+    fp = fopen("transactions.dat", "rb");
+    if (fp != NULL) {
+        while (fread(&trans, sizeof(Transaction), 1, fp) == 1) {
+            if (strcmp(username, trans.username) == 0) {
+                sum += trans.amount;
+                sumSquared += trans.amount * trans.amount;
+                count++;
+                if (trans.amount < min) min = trans.amount;
+                if (trans.amount > max) max = trans.amount;
+            }
+        }
+        fclose(fp);
+        
+        if (count > 0) {
+            float mean = sum / count;
+            float variance = (sumSquared - (sum * sum / count)) / (count - 1);
+            float stdDev = sqrt(variance);
+            
+            printf("\n%sStatistical Analysis%s\n", CYAN, RESET);
+            printf("------------------------\n");
+            printf("Mean: $%.2f\n", mean);
+            printf("Standard Deviation: $%.2f\n", stdDev);
+            printf("Minimum: $%.2f\n", min);
+            printf("Maximum: $%.2f\n", max);
+            printf("Total Transactions: %d\n", count);
+        }
     }
 }
