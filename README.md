@@ -3,14 +3,14 @@
 ## Made by CS-K Group 1
 
 ### Team Members:
-| Name            | PRN       | Role                              |
-|-----------------|-----------|-----------------------------------|
-| Aadi Joshi      | 12414579  | Project Lead                      |
-| Sachin Aage     | 12411942  | Authentication Module Developer   |
-| Sujal Shahane   | 12414560  | Transaction Management Developer  |
-| Shaikh Anas     | 12412236  | Reporting and Analysis Developer  |
-| Shambhavi Verma | 12413626  | Color and UI Developer            |
-| Manav Sharma    | 12412516  | Documentation and Testing Specialist |
+| Roll No. | Name            | PRN       | Role                                |
+|----------|-----------------|-----------|-------------------------------------|
+|     1    | Aadi Joshi      | 12414579  | Project Lead                        |
+|     2    | Sachin Aage     | 12411942  | Documentation and Testing Specialist|
+|     3    | Sujal Shahane   | 12414560  | Transaction Management Developer    |
+|     4    | Shaikh Anas     | 12412236  | Reporting and Analysis Developer    |
+|     5    | Shambhavi Verma | 12413626  | Color and UI Developer              | 
+|     6    | Manav Sharma    | 12412516  | Authentication Module Developer     |
 
 ## Overview
 A C-based Personal Finance Tracker that allows users to manage their financial transactions with features like authentication, transaction management, reporting, and statistical analysis.
