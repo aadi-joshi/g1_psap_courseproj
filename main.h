@@ -4,10 +4,15 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <math.h>
+#include <float.h>
+#include "colors.h"
 
 #define MAX_STRING 100
 #define MAX_TRANSACTIONS 1000
-#define NUM_CATEGORIES 4  // Define as a macro
+#define NUM_CATEGORIES 4
+
+// ...existing code...
 
 typedef struct {
     char username[MAX_STRING];

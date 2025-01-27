@@ -65,7 +65,7 @@ void addTransaction(char *username) {
     } while (!isValidCategory(trans.category));
     
     do {
-        printf("Amount: $");
+        printf("Amount: ₹");
         if (scanf("%f", &trans.amount) != 1 || !isValidAmount(trans.amount)) {
             printf("Invalid amount. Please enter again.\n");
             clearInputBuffer();
@@ -192,7 +192,7 @@ void displayTransactionMatrix(char *username) {
         for(int i = 0; i < 12; i++) {
             for(int j = 0; j < 31; j++) {
                 if(matrix[i][j] != 0)
-                    printf("Month %2d, Day %2d: $%.2f\n", i+1, j+1, matrix[i][j]);
+                    printf("Month %2d, Day %2d: ₹%.2f\n", i+1, j+1, matrix[i][j]);
             }
         }
     }
@@ -224,7 +224,7 @@ void viewTransactions(char *username) {
         sortTransactions(allTrans, count);
         
         for(int i = 0; i < count; i++) {
-            printf("%-12s%-15s$%-11.2f%-20s\n", 
+            printf("%-12s%-15s₹%-11.2f%-20s\n", 
                    allTrans[i].date, 
                    allTrans[i].category, 
                    allTrans[i].amount, 
@@ -271,13 +271,13 @@ void generateReport(char *username) {
         float average = (count > 0) ? total / count : 0;
         
         // Print the report
-        printf("Total Expenses: $%.2f\n", total);
-        printf("Average Expense per Transaction: $%.2f\n", average);
-        printf("Highest Expense: $%.2f\n", highest);
-        printf("Lowest Expense: $%.2f\n", lowest);
+        printf("Total Expenses: ₹%.2f\n", total);
+        printf("Average Expense per Transaction: ₹%.2f\n", average);
+        printf("Highest Expense: ₹%.2f\n", highest);
+        printf("Lowest Expense: ₹%.2f\n", lowest);
         printf("\nExpenses by Category:\n");
         for (int i = 0; i < NUM_CATEGORIES; i++) {
-            printf("%s: $%.2f\n", VALID_CATEGORIES[i], totalByCategory[i]);
+            printf("%s: ₹%.2f\n", VALID_CATEGORIES[i], totalByCategory[i]);
         }
     } else {
         printf("Error: Could not open file for reading.\n");
@@ -305,7 +305,7 @@ void searchTransactions(char *username) {
             if (strcmp(username, trans.username) == 0 && 
                 (strstr(trans.category, searchTerm) || 
                  strstr(trans.description, searchTerm))) {
-                printf("%-12s%-15s$%-11.2f%-20s\n", 
+                printf("%-12s%-15s₹%-11.2f%-20s\n", 
                        trans.date, 
                        trans.category, 
                        trans.amount, 
@@ -344,7 +344,7 @@ void analyzeTrends(char *username) {
         for (int i = 0; i < 12; i++) {
             if (monthlyCount[i] > 0) {
                 float average = monthlyTotals[i] / monthlyCount[i];
-                printf("Month %2d: Total: $%.2f, Avg: $%.2f, Count: %d\n",
+                printf("Month %2d: Total: ₹%.2f, Avg: ₹%.2f, Count: %d\n",
                        i+1, monthlyTotals[i], average, monthlyCount[i]);
             }
         }
@@ -378,10 +378,10 @@ void calculateStatistics(char *username) {
             
             printf("\n%sStatistical Analysis%s\n", CYAN, RESET);
             printf("------------------------\n");
-            printf("Mean: $%.2f\n", mean);
-            printf("Standard Deviation: $%.2f\n", stdDev);
-            printf("Minimum: $%.2f\n", min);
-            printf("Maximum: $%.2f\n", max);
+            printf("Mean: ₹%.2f\n", mean);
+            printf("Standard Deviation: ₹%.2f\n", stdDev);
+            printf("Minimum: ₹%.2f\n", min);
+            printf("Maximum: ₹%.2f\n", max);
             printf("Total Transactions: %d\n", count);
         }
     }
