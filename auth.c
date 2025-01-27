@@ -1,8 +1,12 @@
 #include "auth.h"
+#include <stdio.h>
+#include <conio.h> // For getch()
+
+void getPassword(char *password); // Function prototype
 
 User signIn() {
     User user;
-    printf("\nSign In\n");
+    printf("\nSign In\n(press 'Tab' to toggle visibility)\n");
     
     do {
         printf("Username (max %d chars): ", MAX_STRING-1);
@@ -14,24 +18,55 @@ User signIn() {
         clearInputBuffer();
     } while (strlen(user.username) == 0);
     
-    do {
-        printf("Password (max %d chars): ", MAX_STRING-1);
-        if (scanf("%99s", user.password) != 1) {
-            printf("Invalid password. Please enter again.\n");
-            clearInputBuffer();
-            continue;
-        }
-        clearInputBuffer();
-    } while (strlen(user.password) == 0);
+    printf("Password (max %d chars): ", MAX_STRING-1);
+    getPassword(user.password);
     
     return user;
+}
+
+void getPassword(char *password) {
+    int index = 0;
+    char ch;
+    int showPassword = 0;
+
+    // printf("Enter password (press 'Tab' to toggle visibility): ");
+    while (1) {
+        ch = getch();
+        if (ch == 13) { // Enter key
+            password[index] = '\0';
+            printf("\n");
+            break;
+        } else if (ch == 8) { // Backspace key
+            if (index > 0) {
+                index--;
+                printf("\b \b");
+            }
+        } else if (ch == 9) { // Tab key
+            showPassword = !showPassword;
+            printf("\rPassword (max %d chars): ", MAX_STRING-1);
+            for (int i = 0; i < index; i++) {
+                if (showPassword) {
+                    printf("%c", password[i]);
+                } else {
+                    printf("*");
+                }
+            }
+        } else {
+            password[index++] = ch;
+            if (showPassword) {
+                printf("%c", ch);
+            } else {
+                printf("*");
+            }
+        }
+    }
 }
 
 void registerUser() {
     User newUser, tempUser;
     FILE *fp;
     
-    printf("\nRegister New User\n");
+    printf("\nRegister New User\n(press 'Tab' to toggle password visibility)\n");
     do {
         printf("Username (max %d chars): ", MAX_STRING-1);
         if (scanf("%99s", newUser.username) != 1) {
@@ -49,15 +84,8 @@ void registerUser() {
         return;
     }
     
-    do {
-        printf("Password (max %d chars): ", MAX_STRING-1);
-        if (scanf("%99s", newUser.password) != 1) {
-            printf("Invalid password. Please enter again.\n");
-            clearInputBuffer();
-            continue;
-        }
-        clearInputBuffer();
-    } while (strlen(newUser.password) == 0);
+    printf("Password (max %d chars): ", MAX_STRING-1);
+    getPassword(newUser.password);
     
     fp = fopen("users.csv", "a");
     if (fp != NULL) {
