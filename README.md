@@ -73,8 +73,7 @@ When entering your password during sign-in or registration, the input will be ma
 ## Roles and Responsibilities
 - **Transaction Management Developer**: (Aadi Joshi)
   - Overall project coordination and integration.
-  - Handles the main menu loop and coordinates between authentication and transaction modules.
-  - Responsible for `main.c/h`, `transactions.c/h` and `utils.c/h`.
+  - Responsible for `transactions.c/h` and `utils.c/h`.
   - Implements CRUD (Create, Read, Update and Delete) operations for transactions.
   - Develops functions for sorting, searching, and analyzing transactions.
   - Manages file I/O for transaction storage and statistical calculations.
@@ -96,8 +95,9 @@ When entering your password during sign-in or registration, the input will be ma
   - Implements statistical analysis functions: mean, variance, and standard deviation.
   - Develops data visualization using matrix representation.
 
-- **Color and UI Developer**: (Shambhavi Verma)
-  - Responsible for `colors.h`.
+- **Color and UI Developer and main.c**: (Shambhavi Verma)
+  - Responsible for `colors.h` and `main.c/h`.
+  - Handles the main menu loop and coordinates between authentication and transaction modules.
   - Implements ANSI escape code definitions for terminal color output.
   - Ensures visual feedback throughout the application.
   - Works with the Project Lead to integrate color printing in the main menu and utility functions.

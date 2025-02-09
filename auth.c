@@ -36,12 +36,12 @@ void getPassword(char *password) {
             password[index] = '\0';
             printf("\n");
             break;
-        } else if (ch == 8) { // Backspace key
+        } else if (ch == 8) { // backspace key is pressed 
             if (index > 0) {
                 index--;
                 printf("\b \b");
             }
-        } else if (ch == 9) { // Tab key
+        } else if (ch == 9) { // tab key is pressed
             showPassword = !showPassword;
             printf("\rPassword (max %d chars): ", MAX_STRING-1);
             for (int i = 0; i < index; i++) {
