@@ -12,8 +12,6 @@
 #define MAX_TRANSACTIONS 1000
 #define NUM_CATEGORIES 4
 
-// ...existing code...
-
 typedef struct {
     char username[MAX_STRING];
     char password[MAX_STRING];
