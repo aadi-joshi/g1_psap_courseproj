@@ -5,9 +5,9 @@
 ### Team Members:
 | Roll No. | Name            | PRN       | Role                                |
 |----------|-----------------|-----------|-------------------------------------|
-|     1    | Aadi Joshi      | 12414579  | Project Lead                        |
+|     1    | Aadi Joshi      | 12414579  | Transaction Management Developer    |
 |     2    | Sachin Aage     | 12411942  | Documentation and Testing Specialist|
-|     3    | Sujal Shahane   | 12414560  | Transaction Management Developer    |
+|     3    | Sujal Shahane   | 12414560  | Debugging and Error Resolution      |
 |     4    | Shaikh Anas     | 12412236  | Reporting and Analysis Developer    |
 |     5    | Shambhavi Verma | 12413626  | Color and UI Developer              | 
 |     6    | Manav Sharma    | 12412516  | Authentication Module Developer     |
@@ -71,12 +71,13 @@ This will generate an executable named `finance_tracker`.
 When entering your password during sign-in or registration, the input will be masked with asterisks (*) for security. To toggle the visibility of the password, press the 'Tab' key while typing your password.
 
 ## Roles and Responsibilities
-- **Project Lead**: (Aadi Joshi)
+- **Transaction Management Developer**: (Aadi Joshi)
   - Overall project coordination and integration.
-  - Responsible for `main.c/h` and `utils.c/h`.
-  - Ensures all modules work together seamlessly.
   - Handles the main menu loop and coordinates between authentication and transaction modules.
-  - Implements utility functions for input handling, screen clearing, color printing, and menu display.
+  - Responsible for `main.c/h`, `transactions.c/h` and `utils.c/h`.
+  - Implements CRUD (Create, Read, Update and Delete) operations for transactions.
+  - Develops functions for sorting, searching, and analyzing transactions.
+  - Manages file I/O for transaction storage and statistical calculations.
 
 - **Authentication Module Developer**: (Manav Sharma)
   - Responsible for `auth.c/h`.
@@ -84,11 +85,10 @@ When entering your password during sign-in or registration, the input will be ma
   - Manages file I/O for storing user credentials in CSV format.
   - Ensures input validation and security measures.
 
-- **Transaction Management Developer**: (Sujal Shahane)
-  - Responsible for `transactions.c/h`.
-  - Implements CRUD operations for transactions.
-  - Develops functions for sorting, searching, and analyzing transactions.
-  - Manages file I/O for transaction storage and statistical calculations.
+- **Debugging and Error Resolution**: (Sujal Shahane)
+  - Finds errors in the .exe file (at execution)
+  - Resolves these errors and lets the others know
+  - Ensures all modules work together seamlessly.
 
 - **Reporting and Analysis Developer**: (Shaikh Anas)
   - Works closely with the Transaction Management Developer.
