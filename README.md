@@ -5,7 +5,7 @@
 ### Team Members:
 | Roll No. | Name            | PRN       | Role                                |
 |----------|-----------------|-----------|-------------------------------------|
-|     1    | Aadi Joshi      | 12414579  | Transaction Management Developer    |
+|     1    | Aadi Joshi      | 12414579  | Transaction Management and Colors   |
 |     2    | Sachin Aage     | 12411942  | Documentation and Testing Specialist|
 |     3    | Sujal Shahane   | 12414560  | Debugging and Error Resolution      |
 |     4    | Shaikh Anas     | 12412236  | Reporting and Analysis Developer    |
